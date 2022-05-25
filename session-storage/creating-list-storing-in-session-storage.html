@@ -9,15 +9,19 @@
 </head>
 <body>
     <h1 style="text-align:center ; color:darkolivegreen">Creating list and storing data in session storage</h1>
-    <div id="output">
-        <ul id="taskList">
-
-        </ul>
-    </div>
-    <form action="" id="myForm">
-        Task: <input type="text" name="task" placeholder="add task">
-        <input type="submit" value="Add new Task">
-    </form>
+    <center>
+        <div id="output" style="display: flex; display: flex;
+        align-items: center;
+        justify-content: center;">
+            <ul id="taskList">
+    
+            </ul>
+        </div>
+        <form action="" id="myForm">
+            Task: <input type="text" name="task" placeholder="add task">
+            <input type="submit" value="Add new Task">
+        </form>
+    </center>
     <script defer type="text/javascript">
         var dataJson='';
         var output=document.getElementById('output');

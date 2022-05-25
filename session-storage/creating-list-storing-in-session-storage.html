@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="session storage" content="storing data in session storage ">
+    <title>Storing data in session storage</title>
+</head>
+<body>
+    <h1 style="text-align:center ; color:darkolivegreen">Creating list and storing data in session storage</h1>
+    <div id="output">
+        <ul id="taskList">
+
+        </ul>
+    </div>
+    <form action="" id="myForm">
+        Task: <input type="text" name="task" placeholder="add task">
+        <input type="submit" value="Add new Task">
+    </form>
+    <script defer type="text/javascript">
+        var dataJson='';
+        var output=document.getElementById('output');
+        var taskList=document.querySelector('#taskList');
+        document.getElementById('myForm').addEventListener('submit',function(e){
+            e.preventDefault();
+            var tempValue=document.querySelector('input[name="task"]').value;
+            addNewItem({
+                "info":tempValue,
+                "status":false
+            })
+        })
+        window.onload=function(){
+            if(sessionStorage['taskList']!=null){
+                dataJson=JSON.parse(sessionStorage['taskList']);
+                buildCheckboxes(dataJson);
+            }else {
+                var data= '[{"info":"Cut the Grass","status":false},{"info":"Clean Room","status":true},{"info":"Go to Gym","status":false},{"info":"Make Dinner","status":false}]';
+                dataJson=JSON.parse(data);
+                buildCheckboxes(dataJson);
+            }
+        }
+        function addNewItem(data){
+            addCheckbox(data,dataJson.length);
+            dataJson.push(data);
+            sessionStorage['taskList']=JSON.stringify(dataJson);
+        }
+        function addCheckbox(data,key){
+            var li = document.createElement('li');
+            var checkbox=document.createElement('input');
+            var textInside = document.createTextNode(data.info);
+            var span = document.createElement('span');
+            span.innerHTML='x';
+            span.onclick=remove;
+            checkbox.type='checkbox';
+            checkbox.value=key;
+            checkbox.checked=data.status;
+            checkbox.setAttribute('onchange','updataJSON()');
+            li.appendChild(textInside);
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            document.querySelector('#taskList').appendChild(li);
+        }
+        function remove(event){
+            var index=this.previousElementSibling.value;
+            taskList.innerHTML='';
+            dataJson.splice(index,1);
+            buildCheckboxes(dataJson);
+        }
+        function buildCheckboxes(data){
+            for(var key in data){
+                addCheckbox(data[key],key);
+            }
+        }
+        function updataJSON(){
+            var key=event.target.value;
+            dataJson[key].status=event.target.checked;
+            sessionStorage['taskList']=JSON.stringify(dataJson);
+        }
+    </script>
+</body>
+</html>

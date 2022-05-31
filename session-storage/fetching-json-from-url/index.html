@@ -47,16 +47,17 @@
             fetch(url).then(function(res){
                 return res.json();
             }).then(function(data){
-                console.log(data);
                 dataJson=data;
                 sessionStorage['taskList']=dataJson;
                 buildCheckboxes(dataJson);
+                console.log(dataJson);
             })
         }
         function addNewItem(data){
             addCheckbox(data,dataJson.length);
             dataJson.push(data);
             sessionStorage['taskList']=JSON.stringify(dataJson);
+            
         }
         function addCheckbox(data,key){
             var li = document.createElement('li');

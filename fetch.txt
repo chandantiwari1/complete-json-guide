@@ -11,4 +11,11 @@ Similar javascript has many web api's which provides us functionality and to mak
            }).then(data=>{
                console.log(data);
            });
-           
+
+
+In the fetch api's you can also send the requrest with the credentials that are mentioned as follows 
+
+
+fetch('https://example.com', {
+  credentials: 'include'
+});

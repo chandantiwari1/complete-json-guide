@@ -1,0 +1,14 @@
+// As we know that DOM (Doucment object model ) manipulation is the browser featrure and its not the part of the any language itelft 
+
+Similar javascript has many web api's which provides us functionality and to make our work easy 
+
+
+           One example is the fetch api 
+
+
+           fetch(.... Pass the Url).then(res=>{
+               return res.json() /// 
+           }).then(data=>{
+               console.log(data);
+           });
+           
